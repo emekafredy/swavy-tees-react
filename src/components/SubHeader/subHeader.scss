@@ -1,0 +1,67 @@
+.sub-header-hero {
+  width: 100%;
+  height: 40vh;
+  position: relative;
+
+  &::before {
+    background-image: url('https://previews.123rf.com/images/puhhha/puhhha1805/puhhha180500600/101018603-couple-shopping-happy-man-and-beautiful-smiling-woman-with-colorful-bags-in-mall-high-resolution-.jpg');
+    background-size: cover;
+    background-position: center;
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40vh;
+    z-index: -2;
+  }
+
+  &::after {
+    background-color: #000;
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.5;
+  }
+}
+
+.sub-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+
+  .sub-header-message {
+    color: #fff;
+    height: 100%;
+    text-shadow: #343a40 2px 2px;
+    position: relative;
+
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      margin-left: 0;
+      opacity: 1;
+    }
+
+    .sub-header-title,
+    .sub-header-sub-title {
+      width: 90%;
+      display: block;
+      text-align: center;
+      padding-left: 3rem;
+    }
+
+    .sub-header-title {
+      margin: 3% 0;
+      text-transform: uppercase;
+    }
+  }
+}

@@ -1,0 +1,115 @@
+.product-details-page {
+  // border: 1px solid red;
+  margin-top: 4rem;
+
+  .product-details-column {
+    // border: 1px solid green;
+    height: 100%;
+    margin-left: 2rem;
+
+    h4 {
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    img {
+      width: 80%;
+      background: transparent;
+    }
+
+    .product-price {
+      opacity: 0.7;
+      font-size: 0.85em;
+      text-decoration: line-through;
+    }
+
+    .final-price,
+    .color-title,
+    .size-title {
+      font-weight: bold;
+    }
+
+    .color-title,
+    .size-title {
+      margin-right: 1rem;
+    }
+
+    .my-btns {
+      margin-right: 3px;
+      width: 1.5rem;
+      height: 1.5rem;
+      text-align: center;
+      font-size: 0.8rem;
+      border-radius: 50%;
+      border: 1px solid #000;
+    }
+
+    .my-btns2 {
+      margin-right: 3px;
+      width: 2.5rem;
+      height: 2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      border: 1px solid #000;
+      background-color: #ededed;
+      color: #000;
+
+      &:active {
+        background-color: #000;
+      }
+    }
+
+    .add-to-cart-btn {
+      float: right;
+    }
+
+    .my-cart-btn {
+      float: left;
+    }
+
+    .btn-red {
+      background-color: red;
+    }
+
+    .btn-blue {
+      background-color: blue;
+    }
+
+    .btn-black {
+      background-color: black;
+    }
+
+    .btn-white {
+      background-color: white;
+    }
+
+    .btn-indigo {
+      background-color: indigo;
+    }
+
+    .btn-purple {
+      background-color: purple;
+    }
+
+    .btn-green {
+      background-color: green;
+    }
+
+    .btn-silver {
+      background-color: silver;
+    }
+
+    .btn-orange {
+      background-color: orange;
+    }
+
+    .btn-gray {
+      background-color: gray;
+    }
+
+    .quantity-input {
+      border: 1px solid #000;
+      width: 3rem;
+    }
+  }
+}

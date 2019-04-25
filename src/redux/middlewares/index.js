@@ -9,6 +9,8 @@ import {
   watchDeleteCartSaga,
   watchClearCartSaga
 } from './cartSaga';
+import { watchGetUserProfileSaga, watchUpdateUserProfileSaga, watchGetRegionsSaga } from './profileSaga';
+import { watchGetCheckoutSaga, watchMakePaymentSaga } from './checkoutSaga';
 
 function* rootSaga() {
   yield all([
@@ -23,7 +25,12 @@ function* rootSaga() {
     watchGetCart(),
     watchUpdateCartSaga(),
     watchDeleteCartSaga(),
-    watchClearCartSaga()
+    watchClearCartSaga(),
+    watchGetUserProfileSaga(),
+    watchUpdateUserProfileSaga(),
+    watchGetRegionsSaga(),
+    watchGetCheckoutSaga(),
+    watchMakePaymentSaga()
   ])
 }
 

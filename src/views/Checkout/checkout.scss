@@ -1,0 +1,33 @@
+
+.checkout-wrapper {
+  margin: auto;
+  margin-top: 1rem;
+  margin-bottom: 6rem;
+  width: 60%;
+
+  .checkout-card-title {
+    font-weight: bold;
+  }
+
+  .checkout-user-info {
+    margin-bottom: 0;
+  }
+
+  .card-text {
+    font-size: 0.8rem;
+  }
+
+  .region-div {
+    display: inline;
+  }
+
+  .card-header {
+    background-color: #5cb85c;
+    color: #fff;
+  }
+
+  .little-warning {
+    font-size: 0.6rem;
+    color: red;
+  }
+}

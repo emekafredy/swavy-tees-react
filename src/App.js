@@ -20,6 +20,8 @@ import SignUp from './views/SignUp';
 import ProductDetails from './views/ProductDetails';
 import Category from './views/Category';
 import ShoppingCart from './views/ShoppingCart';
+import UserProfile from './views/UserProfile';
+import Checkout from './views/Checkout';
 
 if (localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken);
@@ -52,6 +54,8 @@ class App extends Component {
                 <Route exact path="/product/:id" component={ ProductDetails } />
                 <Route path="/category/:name" component={ Category } />
                 <Route path="/my-cart" component={ ShoppingCart } />
+                <Route path="/me" component={ UserProfile } />
+                <Route path="/checkout" component={ Checkout } />
               </Switch>
             </div>
           </div>

@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import './navbar.scss';
 import { logUserOut } from '../../redux/actions/authActions';
 import { getCart } from '../../redux/actions/cartActions';
+import { getUserProfile } from '../../redux/actions/profileActions';
 
 class NavBar extends Component {
   onLogoutClick(event) {
@@ -16,21 +17,22 @@ class NavBar extends Component {
   }
 
   componentDidMount() {
-    const { getCart, auth } = this.props;
+    const { getCart, auth, getUserProfile } = this.props;
     if (auth.isAuthenticated) {
       getCart();
+      getUserProfile();
     }
   }
 
   render() {
-    const { totalInCart, auth } = this.props;
-    const { isAuthenticated, user } = auth;
+    const { totalInCart, auth, user } = this.props;
+    const { isAuthenticated } = auth;
     const authMenu = (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
           <Link className="cart-link" to="/my-cart">
             <i className="fa fa-shopping-cart fa-2x cart-num"></i>
-            <span className='badge badge-success' id='lblCartCount'> { totalInCart } </span>
+            { totalInCart !== 0 ? <span className='badge badge-success' id='lblCartCount'> { totalInCart } </span> : '' }
             <span>Cart</span>
           </Link>
         </li>
@@ -42,7 +44,6 @@ class NavBar extends Component {
           <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <Link className="dropdown-item" to="/me">Profile</Link>
             <Link className="dropdown-item" to="/orders">Orders</Link>
-            <Link className="dropdown-item" to="/settings">Settings</Link>
             <hr />
             <Link className="dropdown-item" to="/" onClick={ this.onLogoutClick.bind(this) }>Log out</Link>
           </div>
@@ -84,23 +85,27 @@ class NavBar extends Component {
 
 NavBar.propTypes = {
   logUserOut: PropTypes.func.isRequired,
+  getUserProfile: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   getCart: PropTypes.func.isRequired,
   totalInCart: PropTypes.number,
+  user: PropTypes.object.isRequired,
 }
 
 NavBar.defaultProps = {
   totalInCart: 0
 }
 
-const mapStateToProps = ({ auth, cart }) => ({
+const mapStateToProps = ({ auth, cart,profile }) => ({
   auth,
-  totalInCart: cart.products.totalItems
+  totalInCart: cart.products.totalItems,
+  user: profile.profile
 })
 
 const actionCreators = {
   logUserOut,
-  getCart
+  getCart,
+  getUserProfile
 };
 
 export default connect( mapStateToProps, actionCreators)(withRouter(NavBar));

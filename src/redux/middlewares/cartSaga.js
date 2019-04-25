@@ -1,5 +1,5 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
-import toastr from 'toastr';
+import toast from 'toastr';
 import 'toastr/toastr.scss';
 import CartAPI from '../../APIServices/cartAPI';
 import {
@@ -29,14 +29,14 @@ export function* addProductToCartSaga(action) {
     const response = yield call(CartAPI.addProductToCart, productId, productData);
     const { data } = response;
     yield put(addToCartSuccess(data.cart));
-    toastr.success(data.message);
+    toast.success(data.message);
   }
   catch (error) {
     yield put(addToCartFailure(error.response.data));
     const { colorId, sizeId, product } = error.response.data.errors;
-    colorId && toastr.error(colorId);
-    sizeId && toastr.error(sizeId);
-    product && toastr.error(product);
+    colorId && toast.error(colorId);
+    sizeId && toast.error(sizeId);
+    product && toast.error(product);
   }
 }
 
@@ -52,7 +52,7 @@ export function* getCartSaga() {
   }
   catch (error) {
     yield put(getCartFailure(error.response.data));
-    toastr.error(error.response.data);
+    toast.error(error.response.data);
   }
 }
 
@@ -69,7 +69,7 @@ export function* updateCartSaga(action) {
   }
   catch (error) {
     yield put(updateCartFailure(error.response.data));
-    toastr.error(error.response.data);
+    toast.error(error.response.data);
   }
 }
 
@@ -83,11 +83,11 @@ export function* deleteCartSaga(action) {
     const response = yield call(CartAPI.removeProductFromCart, cartId);
     const { data } = response;
     yield put(deleteCartSuccess(data.deletedProduct));
-    toastr.success(data.message);
+    toast.success(data.message);
   }
   catch (error) {
     yield put(deleteCartFailure(error.response.data));
-    toastr.error(error.response.data);
+    toast.error(error.response.data);
   }
 }
 
@@ -100,11 +100,11 @@ export function* clearCartSaga() {
     const response = yield call(CartAPI.clearCart);
     const { data } = response;
     yield put(clearCartSuccess(data));
-    toastr.success(data.message);
+    toast.success(data.message);
   }
   catch (error) {
     yield put(clearCartFailure(error.response.data));
-    toastr.error(error.response.data);
+    toast.error(error.response.data);
   }
 }
 

@@ -17,7 +17,6 @@ export function* getUserProfileSaga() {
     const response = yield call(ProfileAPI.getUserProfile);
     const { data } = response;
     yield put(getUserProfileSuccess(data.user));
-    toast.success(data.message);
   }
   catch (error) {
     yield put(getUserProfileFailure(error));

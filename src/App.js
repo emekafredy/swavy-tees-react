@@ -22,6 +22,10 @@ import Category from './views/Category';
 import ShoppingCart from './views/ShoppingCart';
 import UserProfile from './views/UserProfile';
 import Checkout from './views/Checkout';
+import NotFound from './components/ProtectRoutes/NotFound';
+import Orders from './views/Orders';
+import PrivateRoute from './components/ProtectRoutes/PrivateRoute';
+import Search from './views/Search';
 
 if (localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken);
@@ -52,10 +56,13 @@ class App extends Component {
                 <Route exact path="/login" component={ Login } />
                 <Route exact path="/register" component={ SignUp } />
                 <Route exact path="/product/:id" component={ ProductDetails } />
-                <Route path="/category/:name" component={ Category } />
-                <Route path="/my-cart" component={ ShoppingCart } />
-                <Route path="/me" component={ UserProfile } />
-                <Route path="/checkout" component={ Checkout } />
+                <Route exact path="/category/:name" component={ Category } />
+                <Route exact path="/keyword/:input" component={ Search } />
+                <PrivateRoute path="/my-cart" component={ ShoppingCart } />
+                <PrivateRoute path="/me" component={ UserProfile } />
+                <PrivateRoute path="/checkout" component={ Checkout } />
+                <PrivateRoute exact path="/orders" component={ Orders }/>
+                <Route component={ NotFound } />
               </Switch>
             </div>
           </div>

@@ -37,13 +37,11 @@ const checkoutReducer = (state = initialState, action) => {
         makingPayment: true,
       }
     case MAKE_PAYMENT_SUCCESS:
-      console.log('MAKE PAYMENT ACTION SUCCESS', action)
       return {
         ...state,
         makingPayment: false,
       }
     case MAKE_PAYMENT_FAILURE:
-      console.log('MAKE PAYMENT ACTION FAILURE', action)
       return {
         ...state,
         makingPayment: false,

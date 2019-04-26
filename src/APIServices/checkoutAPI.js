@@ -11,6 +11,10 @@ class CheckoutAPI {
   static makePayment(paymentData) {
     return axios.post(`${baseUrl}/charge`, paymentData);
   }
+
+  static getOrders() {
+    return axios.get(`${baseUrl}/orders`);
+  }
 }
 
 export default CheckoutAPI;

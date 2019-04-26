@@ -5,10 +5,14 @@ import {
   getCategoriesSuccess,
   getCategoriesFailure,
   getCategorySuccess,
-  getCategoryFailure
+  getCategoryFailure,
+  searchByKeywordSuccess,
+  searchByKeywordFailure,
+  getDepartmentsSuccess,
+  getDepartmentsFailure
 } from '../actions/categoryActions';
 
-import { GET_CATEGORIES, GET_CATEGORY } from '../constants';
+import { GET_CATEGORIES, GET_CATEGORY, SEARCH_BY_KEYWORD, GET_DEPARTMENTS } from '../constants';
 
 export function* getCategoriesSaga() {
   try {
@@ -41,4 +45,37 @@ export function* getCategorySaga(action) {
 
 export function* watchGetCategorySaga() {
   yield takeLatest(GET_CATEGORY, getCategorySaga);
+}
+
+export function* searchByKeywordSaga(action) {
+  try {
+    const { keyword } = action;
+    const response = yield call(CategoriesAPI.searchByKeyword, keyword);
+    const { data } = response;
+    yield put(searchByKeywordSuccess(data.products));
+  }
+  catch (error) {
+    yield put(searchByKeywordFailure(error.response.data.error));
+  }
+}
+
+export function* watchSearchByKeywordSaga() {
+  yield takeLatest(SEARCH_BY_KEYWORD, searchByKeywordSaga);
+}
+
+
+export function* getDepartmentsSaga() {
+  try {
+    const response = yield call(CategoriesAPI.getDepartments);
+    const { data } = response;
+    yield put(getDepartmentsSuccess(data.departments));
+  }
+  catch (error) {
+    yield put(getDepartmentsFailure(error));
+    toast.error(error.response.data);
+  }
+}
+
+export function* watchGetDepartmentsSaga() {
+  yield takeLatest(GET_DEPARTMENTS, getDepartmentsSaga);
 }

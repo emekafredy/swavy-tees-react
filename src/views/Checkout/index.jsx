@@ -31,14 +31,14 @@ class Checkout extends Component {
   };
 
   onToken = async (token) => {
-    const { makePayment } = this.props;
+    const { makePayment, history } = this.props;
     const { selectedType } = this.state;
     const paymentData = {
       shippingId: Number(selectedType),
       stripeToken: token.id,
       stripeEmail: token.email
     };
-    await makePayment(paymentData);
+    await makePayment(paymentData, history);
   }
 
   render() {
@@ -178,7 +178,6 @@ class Checkout extends Component {
                     token={this.onToken}
                     stripeKey='pk_test_Dd2IUOC4Lxnin6RXIjuSzGeC'
                     image="https://t3.ftcdn.net/jpg/01/18/87/58/240_F_118875860_IERKvtHdaL0vPBQVamWNLdRgz3gDUL3c.jpg"
-                    billingAddress={false}
                     disabled={
                       Number(this.state.selectedType) === 0 || !user.address1 || !user.mobilePhone || !user.city || !user.country
                     }
@@ -201,6 +200,7 @@ Checkout.propTypes = {
   getCheckout: PropTypes.func.isRequired,
   makePayment: PropTypes.func.isRequired,
   cart: PropTypes.array,
+  history: PropTypes.object.isRequired
 };
 
 Checkout.defaultProps = {

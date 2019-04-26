@@ -107,9 +107,102 @@
       background-color: gray;
     }
 
-    .quantity-input {
-      border: 1px solid #000;
-      width: 3rem;
+    .text-red {
+      color: red;
+    }
+
+    .text-blue {
+      color: blue;
+    }
+
+    .text-black {
+      color: black;
+    }
+
+    .text-white {
+      color: white;
+    }
+
+    .text-indigo {
+      color: indigo;
+    }
+
+    .text-purple {
+      color: purple;
+    }
+
+    .text-green {
+      color: green;
+    }
+
+    .text-silver {
+      color: silver;
+    }
+
+    .text-orange {
+      color: orange;
+    }
+
+    .text-gray {
+      color: gray;
+    }
+
+    .override-btn-size {
+      width: 2rem;
+      height: 2rem;
+    }
+
+    .selected-product-value {
+      font-weight: bold;
+    }
+
+    button {
+      &:active {
+        outline: none;
+      }
     }
   }
+}
+
+.input-number {
+  width: 80px;
+  line-height: 38px;
+  padding: 10px 12px;
+  vertical-align: top;
+  text-align: center;
+  outline: none;
+}
+
+.input-number,
+.input-number-decrement,
+.input-number-increment {
+  border: 1px solid #ccc;
+  height: 40px;
+  user-select: none;
+}
+
+.input-number-decrement,
+.input-number-increment {
+  display: inline-block;
+  width: 30px;
+  line-height: 38px;
+  background: #f1f1f1;
+  color: #444;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+
+  &:active {
+    background: #ddd;
+  }
+}
+
+.input-number-decrement {
+  border-right: none;
+  border-radius: 4px 0 0 4px;
+}
+
+.input-number-increment {
+  border-left: none;
+  border-radius: 0 4px 4px 0;
 }

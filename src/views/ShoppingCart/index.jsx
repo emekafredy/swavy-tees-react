@@ -10,7 +10,8 @@ import './shoppingCart.scss';
 
 class ShoppingCart extends Component {
   state = {
-    quantity: ''
+    quantity: null,
+    cartId: null,
   }
 
   componentDidMount() {
@@ -18,14 +19,16 @@ class ShoppingCart extends Component {
     getCart()
   }
 
-  handleChange = (event) => {
-    this.setState({ quantity: event.target.value });
-  }
-
-  handleUpdate = (cartId, productQuantity) => {
+  handleUpdate = async (e) => {
+    e.preventDefault();
     const { getCart, updateCart } = this.props;
-    updateCart(cartId, productQuantity);
-    getCart()
+    await this.setState({ cartId: Number(e.target.name), quantity: Number(e.target.value) });
+
+    console.log('event name', this.state.cartId);
+    console.log('event value', this.state.quantity);
+    
+    await updateCart(this.state.cartId, this.state.quantity);
+    getCart();
   }
 
   handleDeleteProductInCart = (cartId) => {
@@ -64,27 +67,28 @@ class ShoppingCart extends Component {
                     {
                       cart.cart ? cart.cart.map((item) => {
                         return (
-                          <tr key={item.id}>
+                          <tr key={ item.id }>
                             <td>
                               <img src="https://images.bewakoof.com/original/marshmello-mask-half-sleeve-t-shirt-men-s-printed-t-shirts-181065-1521616951.jpg" alt=""/>
                             </td>
                             <td> { item.product.name } </td>
                             <td>
-                              <select  name="quantity" value={ this.state.quantity } onChange={(e) => { this.handleChange(e); this.handleUpdate(item.id, this.state.quantity) }}>
-                                <option value="5"> 5 </option>
-                                <option value="3"> 3 </option>
-                                <option value="4"> 4 </option>
-                                <option value="6"> 6 </option>
-                                {/* {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => {
-                                  if (num !== item.quantity) {
-                                    return (
-                                      <option value={ num !== item.quantity ? num : '' } key={ num }>
-                                        { num !== item.quantity ? num : '' } 
-                                      </option>
-                                    )
-                                  }
-                                  return null;
-                                })} */}
+                              <select
+                                className="form-control"
+                                name={ item.id }
+                                value={ item.quantity }
+                                onChange={ this.handleUpdate }
+                              >
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
                               </select>
                             </td>
                             <td> ${ item.product.productTotalPrice.toFixed(2) } </td>

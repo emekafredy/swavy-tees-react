@@ -20,8 +20,9 @@ class CartAPI {
     return axios.delete(`${baseUrl}/shopping-cart`);
   }
 
-  static updateProductInCart(cartId, productQuantity) {
-    return axios.put(`${baseUrl}/shopping-cart/${cartId}`, productQuantity);
+  static updateProductInCart(cartId, quantity) {
+    console.log('CART QUANTITY IN API', typeof quantity);
+    return axios.put(`${baseUrl}/shopping-cart/${cartId}`, quantity);
   }
 }
 

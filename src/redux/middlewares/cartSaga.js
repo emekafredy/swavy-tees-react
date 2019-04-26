@@ -62,14 +62,18 @@ export function* watchGetCart() {
 
 export function* updateCartSaga(action) {
   try {
-    const { cartId, productQuantity } = action;
-    const response = yield call(CartAPI.updateProductInCart, cartId, productQuantity);
+    const { cartId, quantity } = action;
+    console.log('ACTION ID', cartId);
+    console.log('ACTION quantity', quantity);
+    const response = yield call(CartAPI.updateProductInCart, cartId, quantity);
+    console.log('UPDATE RESPONSE', response);
     const { data } = response;
     yield put(updateCartSuccess(data));
   }
   catch (error) {
-    yield put(updateCartFailure(error.response.data));
-    toast.error(error.response.data);
+    console.log('ERROR', error);
+    yield put(updateCartFailure(error));
+    toast.error(error);
   }
 }
 

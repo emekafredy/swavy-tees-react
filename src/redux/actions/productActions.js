@@ -4,7 +4,7 @@ import {
   GET_PRODUCTS_FAILURE,
   GET_PRODUCT,
   GET_PRODUCT_SUCCESS,
-  GET_PRODUCT_FAILURE
+  GET_PRODUCT_FAILURE,
 } from '../constants';
 
 export const getProducts = () => ({

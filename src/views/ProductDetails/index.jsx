@@ -16,23 +16,28 @@ class ProductDetails extends Component {
   state = {
     sizeId: '',
     colorId: '',
-    errors: {}
+    color: '',
+    size: '',
+    errors: {},
+    quantity: 1
   }
 
-  selectColor = (id) => {
-    this.setState({ colorId: id });
+  selectColor = (e, id) => {
+    this.setState({ colorId: id, color: e.target.value });
   }
 
-  selectSize = (id) => {
-    this.setState({ sizeId: id });
+  selectSize = (e, id) => {
+    this.setState({ sizeId: id, size: e.target.value });
   }
+
+  handleQuantityIncrement = () => this.setState({quantity: (this.state.quantity + 1)})
+  handleQuantityDecrement = () => this.setState({quantity: (this.state.quantity - 1)})
 
   handleAddToCart = (productId) => {
     const { addToCart, auth, history } = this.props;
     if (auth.isAuthenticated) {
-      const { sizeId, colorId } = this.state;
-      const attributes = { sizeId, colorId }
-      addToCart(productId, attributes);
+      const { sizeId, colorId, quantity } = this.state;
+      addToCart(productId, { sizeId, colorId, quantity });
     } else {
       history.push('/login');
     }
@@ -45,6 +50,7 @@ class ProductDetails extends Component {
 
   render() {
     const { product, fetchingProduct, addingToCart } = this.props;
+    const { quantity } = this.state;
     return (
       <div>
       {
@@ -67,12 +73,16 @@ class ProductDetails extends Component {
               {product.colors.map(color => {
                 return (
                   <button
-                    className={`btn my-btns btn-${color.value}`}
+                    className={`btn my-btns btn-${color.value} ${this.state.clicked ? 'override-btn-size' : ''}`}
                     key={color.id}
-                    onClick={() => this.selectColor(color.id)}
+                    onClick={(e) => this.selectColor(e, color.id)}
+                    value={ color.value }
                   />
                 )
               })}
+              <p> 
+                Selected: <span className={`selected-product-value text-${this.state.color}`}> { this.state.color } </span>  
+              </p>
               <hr />
             </div>
             <hr />
@@ -83,14 +93,38 @@ class ProductDetails extends Component {
                   <button
                     className="btn btn-info my-btns2"
                     key={size.id}
-                    onClick={() => this.selectSize(size.id)}
+                    onClick={(e) => this.selectSize(e, size.id)}
+                    value={ size.value }
                   > 
                     {size.value}
                   </button>
                 )
               })}
+              <p> 
+                Selected: <span className="selected-product-value"> { this.state.size } </span>  
+              </p>
             </div>
             <hr />
+            <hr/>
+            <div>
+              <span className="size-title"> QUANTITY: </span>
+              <button 
+                className="input-number-decrement" 
+                disabled={ quantity === 1 }
+                onClick={ this.handleQuantityDecrement }
+              >–</button>
+              <input 
+                className="input-number" 
+                type="text" 
+                value={ quantity }
+                disabled
+              />
+              <button 
+                className="input-number-increment" 
+                disabled={ quantity === 10 }
+                onClick={ this.handleQuantityIncrement }
+              >+</button>
+            </div>
             <hr/>
             <Link
               className="btn btn-primary my-cart-btn"

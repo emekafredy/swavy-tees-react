@@ -20,9 +20,10 @@ export const getCheckoutFailure = error => ({
   error
 });
 
-export const makePayment = (paymentData) => ({
+export const makePayment = (paymentData, history) => ({
   type: MAKE_PAYMENT,
-  paymentData
+  paymentData,
+  history
 });
 
 export const makePaymentSuccess = () => ({

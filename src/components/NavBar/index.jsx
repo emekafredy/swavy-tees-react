@@ -9,11 +9,16 @@ import { getCart } from '../../redux/actions/cartActions';
 import { getUserProfile } from '../../redux/actions/profileActions';
 
 class NavBar extends Component {
+  state = { inputValue: '' }
   onLogoutClick(event) {
     event.preventDefault();
     const { logUserOut, history } = this.props;
     logUserOut();
     history.push('/');
+  }
+
+  handleOnChange = (event) => {
+    this.setState({ inputValue: event.target.value })
   }
 
   componentDidMount() {
@@ -27,6 +32,7 @@ class NavBar extends Component {
   render() {
     const { totalInCart, auth, user } = this.props;
     const { isAuthenticated } = auth;
+    const { inputValue } = this.state;
     const authMenu = (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
@@ -39,7 +45,7 @@ class NavBar extends Component {
         <div className="vl"></div>
         <li className="nav-item dropdown">
           <Link className="nav-link dropdown-toggle user-profile-dropdown" to="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Hi, { user.firstName }
+            Hi, { user.firstName || auth.user.firstName }
           </Link>
           <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <Link className="dropdown-item" to="/me">Profile</Link>
@@ -72,8 +78,19 @@ class NavBar extends Component {
           </button>
           <div className="collapse navbar-collapse" id="navbarResponsive">
             <form className="form-inline my-2 my-lg-0">
-              <input className="form-control mr-sm-2" type="search" placeholder="Search for products" aria-label="Search" />
-              <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              <input 
+                className="form-control mr-sm-2" 
+                type="search" 
+                placeholder="Search for products" 
+                aria-label="Search" 
+                onChange={ this.handleOnChange }
+              />
+              <Link 
+                className="btn btn-outline-success my-2 my-sm-0" 
+                to={`/keyword/${inputValue}`}
+              >
+                Search
+              </Link>
             </form>
             { isAuthenticated ? authMenu : menu }
           </div>
@@ -96,7 +113,7 @@ NavBar.defaultProps = {
   totalInCart: 0
 }
 
-const mapStateToProps = ({ auth, cart,profile }) => ({
+const mapStateToProps = ({ auth, cart, profile }) => ({
   auth,
   totalInCart: cart.products.totalItems,
   user: profile.profile

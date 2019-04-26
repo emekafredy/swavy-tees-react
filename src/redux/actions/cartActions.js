@@ -46,10 +46,10 @@ export const getCartFailure = error => ({
   error,
 });
 
-export const updateCart = (cartId, productQuantity) => ({
+export const updateCart = (cartId, quantity) => ({
   type: UPDATE_CART,
   cartId,
-  productQuantity
+  quantity
 });
 
 export const updateCartSuccess = updatedCart => ({

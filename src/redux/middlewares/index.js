@@ -1,6 +1,11 @@
 import { all } from 'redux-saga/effects';
 import { watchGetProductsSaga, watchGetProductSaga } from './productsSaga';
-import { watchGetCategoriesSaga, watchGetCategorySaga } from './categorySaga';
+import {
+  watchGetCategoriesSaga,
+  watchGetCategorySaga,
+  watchSearchByKeywordSaga,
+  watchGetDepartmentsSaga
+} from './categorySaga';
 import { watchUserSignUpSaga, watchlogUserOutSaga, watchUserLoginSaga } from './authSaga';
 import {
   watchAddProductToCart,
@@ -10,7 +15,7 @@ import {
   watchClearCartSaga
 } from './cartSaga';
 import { watchGetUserProfileSaga, watchUpdateUserProfileSaga, watchGetRegionsSaga } from './profileSaga';
-import { watchGetCheckoutSaga, watchMakePaymentSaga } from './checkoutSaga';
+import { watchGetCheckoutSaga, watchMakePaymentSaga, watchGetOrdersSaga } from './checkoutSaga';
 
 function* rootSaga() {
   yield all([
@@ -30,7 +35,10 @@ function* rootSaga() {
     watchUpdateUserProfileSaga(),
     watchGetRegionsSaga(),
     watchGetCheckoutSaga(),
-    watchMakePaymentSaga()
+    watchMakePaymentSaga(),
+    watchGetOrdersSaga(),
+    watchSearchByKeywordSaga(),
+    watchGetDepartmentsSaga()
   ])
 }
 

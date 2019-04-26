@@ -5,10 +5,11 @@ import {
   getCheckoutSuccess,
   getCheckoutFailure,
   makePaymentSuccess,
-  makePaymentFailure
+  makePaymentFailure,
 } from '../actions/checkoutActions';
+import { getOrdersSuccess, getOrdersFailure } from '../actions/ordersAction';
 
-import { GET_CHECKOUT, MAKE_PAYMENT } from '../constants/index';
+import { GET_CHECKOUT, MAKE_PAYMENT, GET_ORDERS } from '../constants/index';
 
 export function* getCheckoutSaga() {
   try {
@@ -28,13 +29,14 @@ export function* watchGetCheckoutSaga() {
 
 export function* makePaymentSaga(action) {
   try {
-    const { paymentData } = action;
+    const { paymentData, history } = action;
     const response = yield call(CheckoutAPI.makePayment, paymentData);
     console.log('RES', response);
     const { data } = response;
     yield put(makePaymentSuccess(data));
     toast.success(`Congratulations! Your payment was successful. 
       View your orders to get details of your orders`);
+    history.push('/orders');
   }
   catch (error) {
     yield put(makePaymentFailure(error));
@@ -44,4 +46,21 @@ export function* makePaymentSaga(action) {
 
 export function* watchMakePaymentSaga() {
   yield takeLatest(MAKE_PAYMENT, makePaymentSaga);
+}
+
+export function* getOrdersSaga() {
+  try {
+    const response = yield call(CheckoutAPI.getOrders);
+    const { data } = response;
+    yield put(getOrdersSuccess(data));
+    toast.success(data.message);
+  }
+  catch (error) {
+    yield put(getOrdersFailure(error));
+    toast.error(error);
+  }
+}
+
+export function* watchGetOrdersSaga() {
+  yield takeLatest(GET_ORDERS, getOrdersSaga);
 }

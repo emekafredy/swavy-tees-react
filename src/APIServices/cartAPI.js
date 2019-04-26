@@ -21,8 +21,7 @@ class CartAPI {
   }
 
   static updateProductInCart(cartId, quantity) {
-    console.log('CART QUANTITY IN API', typeof quantity);
-    return axios.put(`${baseUrl}/shopping-cart/${cartId}`, quantity);
+    return axios.put(`${baseUrl}/shopping-cart/${cartId}`, { quantity });
   }
 }
 

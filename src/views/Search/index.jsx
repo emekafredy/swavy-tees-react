@@ -37,14 +37,15 @@ class Search extends Component {
   }
 
   render() {
-    const { fetchingCategories, products, subHeaderMessage, subHeaderTitle } = this.props;
+    const { fetchingCategories, products, subHeaderTitle } = this.props;
+    const subHeaderMessage = `Your Search Results for ${ this.props.match.params.input }`;
     return (
       <div>
         {
           fetchingCategories ? <Loader />
           : <div>
               <SubHeader
-                subHeaderMessage={subHeaderMessage}
+                subHeaderMessage={ products.length > 0 ? subHeaderMessage : '' }
                 subHeaderTitle={subHeaderTitle}
               />
               {
@@ -70,7 +71,6 @@ Search.propTypes = {
 Search.defaultProps = {
   products: [],
   subHeaderTitle: '',
-  subHeaderMessage: ''
 }
 
 const actionCreators = {

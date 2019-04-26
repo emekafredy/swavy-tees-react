@@ -3,17 +3,19 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './productsCard.scss';
 
+const imageUrlPrefix = process.env.REACT_APP_CLOUDINARY_URL;
+
 class ProductsCard extends Component {
   render() {
     const { products } = this.props;
     return (
       <div className="products-container">
         {products.map((product) => {
-          const { id, name, price, discountedPrice } = product;
+          const { id, name, price, discountedPrice, image } = product;
           return (
             <Link key={id} className="product-details-link card product-card" to={`/product/${id}`}>
               <div className="view-product">
-                <img className="card-img-top" src="https://images.bewakoof.com/original/marshmello-mask-half-sleeve-t-shirt-men-s-printed-t-shirts-181065-1521616951.jpg" alt="Card cap"/>
+                <img className="card-img-top" src={`${imageUrlPrefix}/${image}`} alt="Card cap"/>
               </div>
               <div className="card-body">
                 <p className="card-title"> { name } </p>

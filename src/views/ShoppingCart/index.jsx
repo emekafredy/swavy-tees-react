@@ -8,6 +8,7 @@ import Loader from '../../components/Loader/index';
 
 import './shoppingCart.scss';
 
+const imageUrlPrefix = process.env.REACT_APP_CLOUDINARY_URL;
 class ShoppingCart extends Component {
   state = {
     quantity: null,
@@ -21,14 +22,9 @@ class ShoppingCart extends Component {
 
   handleUpdate = async (e) => {
     e.preventDefault();
-    const { getCart, updateCart } = this.props;
+    const { updateCart } = this.props;
     await this.setState({ cartId: Number(e.target.name), quantity: Number(e.target.value) });
-
-    console.log('event name', this.state.cartId);
-    console.log('event value', this.state.quantity);
-    
     await updateCart(this.state.cartId, this.state.quantity);
-    getCart();
   }
 
   handleDeleteProductInCart = (cartId) => {
@@ -42,7 +38,7 @@ class ShoppingCart extends Component {
   }
 
   render() {
-    const { cart, fetchingCart, deletingProduct } = this.props;
+    const { cart, fetchingCart, deletingProduct, updatingCart } = this.props;
     return (
       <div>
         {
@@ -69,26 +65,21 @@ class ShoppingCart extends Component {
                         return (
                           <tr key={ item.id }>
                             <td>
-                              <img src="https://images.bewakoof.com/original/marshmello-mask-half-sleeve-t-shirt-men-s-printed-t-shirts-181065-1521616951.jpg" alt=""/>
+                              <img src={`${imageUrlPrefix}/${item.product.thumbnail}`} alt=""/>
                             </td>
                             <td> { item.product.name } </td>
                             <td>
                               <select
-                                className="form-control"
                                 name={ item.id }
                                 value={ item.quantity }
                                 onChange={ this.handleUpdate }
+                                disabled={ updatingCart }
                               >
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
+                                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((number) => {
+                                  return (
+                                    <option key={ number } value={ number }> {number} </option>
+                                  )
+                                })}
                               </select>
                             </td>
                             <td> ${ item.product.productTotalPrice.toFixed(2) } </td>
@@ -155,6 +146,7 @@ ShoppingCart.propTypes = {
   updateCart: PropTypes.func.isRequired,
   deleteCart: PropTypes.func.isRequired,
   clearCart: PropTypes.func.isRequired,
+  updatingCart: PropTypes.bool.isRequired,
 };
 
 const actionCreators = {
@@ -167,7 +159,8 @@ const actionCreators = {
 export const mapStateToProps = ({ cart }) => ({
   cart: cart.products,
   fetchingCart: cart.fetchingCart,
-  deletingProduct: cart.deletingProduct
+  deletingProduct: cart.deletingProduct,
+  updatingCart: cart.updatingCart
 });
 
 export default connect( mapStateToProps, actionCreators)(ShoppingCart);

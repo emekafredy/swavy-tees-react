@@ -26,7 +26,7 @@ export const initialState = {
   errors: {}
 }
 
-let newQuantity, updatedCart, deletedCartValues;
+let updatedCart, deletedCartValues;
 
 const cartReducer = (state = initialState, action) => {
   switch(action.type) {
@@ -36,14 +36,10 @@ const cartReducer = (state = initialState, action) => {
         addingToCart: true,
       }
     case ADD_TO_CART_SUCCESS:
-      let { totalItems, ...products } = state.products;
-      newQuantity = totalItems + 1;
-      products.totalItems = newQuantity;
       return {
         ...state,
         addingToCart: false,
-        product: action.cart,
-        products
+        products: action.cart,
       }
     case ADD_TO_CART_FAILURE:
       return {
@@ -77,7 +73,7 @@ const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         updatingCart: false,
-        product: action.updatedCart,
+        products: action.cart,
       }
     case UPDATE_CART_FAILURE:
       return {
@@ -92,10 +88,10 @@ const cartReducer = (state = initialState, action) => {
       }
     case DELETE_PRODUCT_IN_CART_SUCCESS:
       const { cart, subTotalPrice, discount, ...myProducts } = state.products;
-      updatedCart = state.products.cart.filter(list => action.cart.id !== list.id);
-      deletedCartValues = state.products.cart.filter(list => action.cart.id === list.id);
+      updatedCart = state.products.cart.filter(list => action.cart.deletedProduct.id !== list.id);
+      deletedCartValues = state.products.cart.filter(list => action.cart.deletedProduct.id === list.id);
       myProducts.cart = updatedCart;
-      myProducts.totalItems = state.products.totalItems - action.cart.quantity;
+      myProducts.totalItems = state.products.totalItems - action.cart.deletedProduct.quantity;
       myProducts.discount = discount - deletedCartValues[0].discount;
       myProducts.subTotalPrice = subTotalPrice - deletedCartValues[0].product.productTotalPrice;
       myProducts.totalPrice = subTotalPrice - (deletedCartValues[0].product.productTotalPrice * deletedCartValues[0].quantity);

@@ -39,6 +39,11 @@ class Login extends Component {
     }
   }
 
+  componentWillUnmount() {
+    console.log('Dismounted');
+    this.setState({ });
+  }
+
   static getDerivedStateFromProps(props, state) {
     if (props.auth.isAuthenticated) {
       props.history.push('/');

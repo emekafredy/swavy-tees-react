@@ -41,6 +41,10 @@ class SignUp extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.setState({ errors: {} });
+  }
+
   static getDerivedStateFromProps(props, state) {
     if (props.auth.isAuthenticated) {
       props.history.push('/');
@@ -134,7 +138,7 @@ class SignUp extends Component {
           </div>
 
           <button className="btn btn-lg btn-success btn-block" type="submit" disabled={authenticating}>
-            { authenticating ? <i class="fa fa-spinner fa-spin"></i> : ''}
+            { authenticating ? <i className="fa fa-spinner fa-spin"></i> : ''}
             Register
           </button>
           <Link className="d-block text-center mt-2 small" to="/login">Sign In Instead</Link>

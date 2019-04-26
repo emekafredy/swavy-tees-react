@@ -22,9 +22,9 @@ export const addToCart = (productId, productData) => ({
   productData
 });
 
-export const addToCartSuccess = product => ({
+export const addToCartSuccess = cart => ({
   type: ADD_TO_CART_SUCCESS,
-  product
+  cart
 });
 
 export const addToCartFailure = error => ({
@@ -52,9 +52,9 @@ export const updateCart = (cartId, quantity) => ({
   quantity
 });
 
-export const updateCartSuccess = updatedCart => ({
+export const updateCartSuccess = cart => ({
   type: UPDATE_CART_SUCCESS,
-  updatedCart
+  cart
 });
 
 export const updateCartFailure = error => ({

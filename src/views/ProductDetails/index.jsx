@@ -12,6 +12,7 @@ import Loader from '../../components/Loader/index';
 
 import './productDetails.scss';
 
+const imageUrlPrefix = process.env.REACT_APP_CLOUDINARY_URL;
 class ProductDetails extends Component {
   state = {
     sizeId: '',
@@ -60,7 +61,7 @@ class ProductDetails extends Component {
             <hr />
             <h4 className="product-name"> {product.name} </h4>
             <hr />
-            <img src="https://images.bewakoof.com/original/marshmello-mask-half-sleeve-t-shirt-men-s-printed-t-shirts-181065-1521616951.jpg" alt=""/>
+            <img src={`${imageUrlPrefix}/${product.image}`} alt=""/>
           </div>
           <div className="col-md-5 product-details-column col-md-offset-2">
             <hr />

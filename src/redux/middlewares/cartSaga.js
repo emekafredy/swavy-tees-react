@@ -28,7 +28,7 @@ export function* addProductToCartSaga(action) {
   try {
     const response = yield call(CartAPI.addProductToCart, productId, productData);
     const { data } = response;
-    yield put(addToCartSuccess(data.cart));
+    yield put(addToCartSuccess(data));
     toast.success(data.message);
   }
   catch (error) {
@@ -63,15 +63,11 @@ export function* watchGetCart() {
 export function* updateCartSaga(action) {
   try {
     const { cartId, quantity } = action;
-    console.log('ACTION ID', cartId);
-    console.log('ACTION quantity', quantity);
     const response = yield call(CartAPI.updateProductInCart, cartId, quantity);
-    console.log('UPDATE RESPONSE', response);
     const { data } = response;
     yield put(updateCartSuccess(data));
   }
   catch (error) {
-    console.log('ERROR', error);
     yield put(updateCartFailure(error));
     toast.error(error);
   }
@@ -86,10 +82,11 @@ export function* deleteCartSaga(action) {
     const { cartId } = action;
     const response = yield call(CartAPI.removeProductFromCart, cartId);
     const { data } = response;
-    yield put(deleteCartSuccess(data.deletedProduct));
+    yield put(deleteCartSuccess(data));
     toast.success(data.message);
   }
   catch (error) {
+    console.log(error)
     yield put(deleteCartFailure(error.response.data));
     toast.error(error.response.data);
   }

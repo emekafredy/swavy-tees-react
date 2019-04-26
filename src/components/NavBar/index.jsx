@@ -21,6 +21,13 @@ class NavBar extends Component {
     this.setState({ inputValue: event.target.value })
   }
 
+  handleOnKeyDown = (event) => {
+    const { history } = this.props;
+    if (event.key === 'Enter') {
+      history.push(`/keyword/${this.state.inputValue}`);
+    }
+  }
+
   componentDidMount() {
     const { getCart, auth, getUserProfile } = this.props;
     if (auth.isAuthenticated) {
@@ -80,10 +87,12 @@ class NavBar extends Component {
             <form className="form-inline my-2 my-lg-0">
               <input 
                 className="form-control mr-sm-2" 
-                type="search" 
+                type="search"
+                value= { this.state.inputValue }
                 placeholder="Search for products" 
                 aria-label="Search" 
                 onChange={ this.handleOnChange }
+                onKeyDown={ this.handleOnKeyDown }
               />
               <Link 
                 className="btn btn-outline-success my-2 my-sm-0" 

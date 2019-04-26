@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -21,6 +21,13 @@ class SideMenuBar extends Component {
     this.setState({ inputValue: event.target.value })
   }
 
+  handleOnKeyDown = (event) => {
+    const { history } = this.props;
+    if (event.key === 'Enter') {
+      history.push(`/keyword/${this.state.inputValue}`);
+    }
+  }
+
   render() {
     const { categories, fetchingCategories, departments, fetchingDepartments } = this.props;
     const { inputValue } = this.state;
@@ -40,7 +47,9 @@ class SideMenuBar extends Component {
                     type="text" 
                     className="form-control search-menu" 
                     placeholder="Search..."
+                    value = { this.state.inputValue }
                     onChange={ this.handleOnChange }
+                    onKeyDown={ this.handleOnKeyDown }
                   />
                   <div className="input-group-append">
                     <Link className="input-group-text" to={`/keyword/${inputValue}`} >
@@ -91,6 +100,7 @@ SideMenuBar.propTypes = {
   getDepartments: PropTypes.func.isRequired,
   fetchingCategories: PropTypes.bool.isRequired,
   categories: PropTypes.array,
+  history: PropTypes.object.isRequired,
 };
 
 SideMenuBar.defaultProps = {
@@ -109,4 +119,4 @@ export const mapStateToProps = ({ categories }) => ({
   fetchingDepartments: categories.fetchingDepartments
 });
 
-export default connect( mapStateToProps, actionCreators)(SideMenuBar);
+export default connect( mapStateToProps, actionCreators)(withRouter(SideMenuBar));

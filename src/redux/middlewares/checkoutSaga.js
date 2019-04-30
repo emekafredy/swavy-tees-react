@@ -19,7 +19,6 @@ export function* getCheckoutSaga() {
   }
   catch (error) {
     yield put(getCheckoutFailure(error));
-    toast.error(error);
   }
 }
 

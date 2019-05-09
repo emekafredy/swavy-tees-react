@@ -32,8 +32,8 @@ export function* watchGetCategoriesSaga() {
 
 export function* getCategorySaga(action) {
   try {
-    const { categoryName } = action;
-    const response = yield call(CategoriesAPI.getCategory, categoryName);
+    const { categoryName, currentPage } = action;
+    const response = yield call(CategoriesAPI.getCategory, categoryName, currentPage);
     const { data } = response;
     yield put(getCategorySuccess(data));
   }
@@ -49,10 +49,10 @@ export function* watchGetCategorySaga() {
 
 export function* searchByKeywordSaga(action) {
   try {
-    const { keyword } = action;
-    const response = yield call(CategoriesAPI.searchByKeyword, keyword);
+    const { keyword, currentPage } = action;
+    const response = yield call(CategoriesAPI.searchByKeyword, keyword, currentPage);
     const { data } = response;
-    yield put(searchByKeywordSuccess(data.products));
+    yield put(searchByKeywordSuccess(data));
   }
   catch (error) {
     yield put(searchByKeywordFailure(error.response.data.error));

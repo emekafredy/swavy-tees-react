@@ -1,0 +1,24 @@
+.pagination-div {
+  margin-bottom: 4rem;
+  margin-top: 3rem;
+
+  .pagination-ul {
+    display: inline;
+
+    .pagination-list {
+      display: inline;
+      text-decoration: none;
+
+      &:hover {
+        cursor: pointer;
+        background-color: #5cb85c;
+        color: #fff;
+      }
+    }
+
+    .is-active {
+      background-color: #5cb85c;
+      color: #fff;
+    }
+  }
+}

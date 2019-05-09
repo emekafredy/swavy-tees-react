@@ -37,7 +37,7 @@ class Orders extends Component {
                       <th>Size</th>
                       <th>Quantity</th>
                       <th>Unit Price</th>
-                      <th>Total Price</th>
+                      <th>Price</th>
                       <th>Current Status</th>
                       <th>Ordered On</th>
                     </tr>

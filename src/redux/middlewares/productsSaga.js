@@ -10,11 +10,12 @@ import {
 
 import { GET_PRODUCTS, GET_PRODUCT } from '../constants';
 
-export function* getProductsSaga() {
+export function* getProductsSaga(action) {
+  const { currentPage } = action;
   try {
-    const response = yield call(ProductsAPI.getProducts);
+    const response = yield call(ProductsAPI.getProducts, currentPage);
     const { data } = response;
-    yield put(getProductsSuccess(data.products));
+    yield put(getProductsSuccess(data));
   }
   catch (error) {
     yield put(getProductsFailure(error));

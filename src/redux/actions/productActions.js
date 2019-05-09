@@ -7,8 +7,9 @@ import {
   GET_PRODUCT_FAILURE,
 } from '../constants';
 
-export const getProducts = () => ({
+export const getProducts = currentPage => ({
   type: GET_PRODUCTS,
+  currentPage
 });
 
 export const getProductsSuccess = products => ({

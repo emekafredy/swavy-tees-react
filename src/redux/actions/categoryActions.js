@@ -27,9 +27,10 @@ export const getCategoriesFailure = error => ({
   error
 });
 
-export const getCategory = categoryName => ({
+export const getCategory = (categoryName, currentPage) => ({
   type: GET_CATEGORY,
-  categoryName
+  categoryName,
+  currentPage
 });
 
 export const getCategorySuccess = category => ({
@@ -42,9 +43,10 @@ export const getCategoryFailure = error => ({
   error
 });
 
-export const searchByKeyword = (keyword) => ({
+export const searchByKeyword = (keyword, currentPage) => ({
   type: SEARCH_BY_KEYWORD,
-  keyword
+  keyword,
+  currentPage
 });
 
 export const searchByKeywordSuccess = products => ({

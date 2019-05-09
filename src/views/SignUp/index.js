@@ -11,8 +11,7 @@ class SignUp extends Component {
   constructor() {
     super();
     this.state = {
-      firstName: '',
-      lastName: '',
+      name: '',
       email: '',
       password: '',
       confirmPassword: '',
@@ -30,8 +29,8 @@ class SignUp extends Component {
   handleSubmit(event) {
     event.preventDefault();
     const { authenticateUser } = this.props;
-    const { firstName, lastName, email, password, confirmPassword } = this.state;
-    const newUser = { firstName, lastName, email, password, confirmPassword }
+    const { name, email, password, confirmPassword } = this.state;
+    const newUser = { name, email, password, confirmPassword }
     authenticateUser(newUser);
   }
 
@@ -63,31 +62,16 @@ class SignUp extends Component {
           <div className="form-label-group">
             <input 
               type="text"
-              id="firstName"
+              id="name"
               className="form-control"
-              placeholder="First name"
+              placeholder="Name"
               required
-              name="firstName"
-              value={ this.state.firstName }
+              name="name"
+              value={ this.state.name }
               onChange={ this.handleChange }
             />
-            <label htmlFor="firstName">First name</label>
-            { errors.firstName ? (<p className="error-display"> { errors.firstName } </p>) : '' }
-          </div>
-
-          <div className="form-label-group">
-            <input 
-              type="text"
-              id="lastName"
-              className="form-control"
-              placeholder="Last name"
-              required
-              name="lastName"
-              value={ this.state.lastName }
-              onChange={ this.handleChange }
-            />
-            <label htmlFor="lastName">Last name</label>
-            { errors.lastName ? (<p className="error-display"> { errors.lastName } </p>) : '' }
+            <label htmlFor="name">Name</label>
+            { errors.name ? (<p className="error-display"> { errors.name } </p>) : '' }
           </div>
 
           <div className="form-label-group">

@@ -10,8 +10,7 @@ class UpdateProfileModal extends Component {
   constructor() {
     super();
     this.state = {
-      firstName: '',
-      lastName: '',
+      name: '',
       address1: '',
       address2: '',
       city: '',
@@ -28,16 +27,15 @@ class UpdateProfileModal extends Component {
   componentWillReceiveProps(props, state) {
     const { user } = props;
     this.setState({
-      firstName: user.firstName || '',
-      lastName: user.lastName || '',
-      address1: user.address1 || '',
-      address2: user.address2 || '',
+      name: user.name || '',
+      address1: user.address_1 || '',
+      address2: user.address_2 || '',
       city: user.city || '',
       country: user.country || '',
-      postalCode: user.postalCode || '',
-      dayPhone: user.dayPhone || '',
-      eveningPhone: user.eveningPhone || '',
-      mobilePhone: user.mobilePhone || '',
+      postalCode: user.postal_code || '',
+      dayPhone: user.day_phone || '',
+      eveningPhone: user.evening_phone || '',
+      mobilePhone: user.mobile_phone || '',
     })
   }
 
@@ -49,10 +47,10 @@ class UpdateProfileModal extends Component {
     event.preventDefault();
     let { updateUserProfile } = this.props;
     const {
-      firstName, lastName, address1, address2, city, country, postalCode, dayPhone, eveningPhone, mobilePhone
+      name, address1, address2, city, country, postalCode, dayPhone, eveningPhone, mobilePhone
     } = this.state;
     const userUpdateData = {
-      firstName, lastName, address1, address2, city, country, postalCode, dayPhone, eveningPhone, mobilePhone
+      name, address1, address2, city, country, postalCode, dayPhone, eveningPhone, mobilePhone
     }
     updateUserProfile(userUpdateData);
   }
@@ -60,7 +58,7 @@ class UpdateProfileModal extends Component {
   render() {
     const { onClose, show, updatingProfile } = this.props;
     const {
-      firstName, lastName, address1, address2, city, country, postalCode, dayPhone, eveningPhone, mobilePhone
+      name, address1, address2, city, country, postalCode, dayPhone, eveningPhone, mobilePhone
     } = this.state;
     return (
       <Fragment>
@@ -70,23 +68,13 @@ class UpdateProfileModal extends Component {
               <hr/>
               <form>
                 <div className="form-row">
-                  <div className="form-group col-md-6">
-                    <label htmlFor="firstName">First Name</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="firstName"
-                      value={firstName}
-                      onChange={ this.handleChange }
-                    />
-                  </div>
-                  <div className="form-group col-md-6">
-                    <label htmlFor="lastName">Last Name</label>
+                  <div className="form-group col-md-12">
+                    <label htmlFor="name">Name</label>
                     <input
                       type="text" 
                       className="form-control" 
-                      name="lastName"
-                      value={lastName}
+                      name="name"
+                      value={name}
                       onChange={ this.handleChange }
                     />
                   </div>

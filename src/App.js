@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import jwt_decode from 'jwt-decode';
+import axios from 'axios';
 
 import store from './redux/store';
 import './App.css';
@@ -27,6 +28,7 @@ import Orders from './views/Orders';
 import PrivateRoute from './components/ProtectRoutes/PrivateRoute';
 import Search from './views/Search';
 
+axios.defaults.withCredentials = true;
 if (localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken);
   const decoded = jwt_decode(localStorage.jwtToken);
@@ -53,12 +55,15 @@ class App extends Component {
             <div className="col-sm-6 col-md-8 col-lg-8 main-page">
               <Switch>
                 <Route exact path="/" component={ LandingPage } />
+                <Route exact path="/products/page/:id" component={ LandingPage } />
                 <Route exact path="/login" component={ Login } />
                 <Route exact path="/register" component={ SignUp } />
                 <Route exact path="/product/:id" component={ ProductDetails } />
                 <Route exact path="/category/:name" component={ Category } />
+                <Route exact path="/category/:name/:id" component={ Category } />
                 <Route exact path="/keyword/:input" component={ Search } />
-                <PrivateRoute path="/my-cart" component={ ShoppingCart } />
+                <Route exact path="/keyword/:input/:id" component={ Search } />
+                <Route path="/my-cart" component={ ShoppingCart } />
                 <PrivateRoute path="/me" component={ UserProfile } />
                 <PrivateRoute path="/checkout" component={ Checkout } />
                 <PrivateRoute exact path="/orders" component={ Orders }/>

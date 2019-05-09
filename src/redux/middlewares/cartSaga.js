@@ -86,7 +86,6 @@ export function* deleteCartSaga(action) {
     toast.success(data.message);
   }
   catch (error) {
-    console.log(error)
     yield put(deleteCartFailure(error.response.data));
     toast.error(error.response.data);
   }

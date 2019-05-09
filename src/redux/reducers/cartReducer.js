@@ -26,8 +26,6 @@ export const initialState = {
   errors: {}
 }
 
-let updatedCart, deletedCartValues;
-
 const cartReducer = (state = initialState, action) => {
   switch(action.type) {
     case ADD_TO_CART:
@@ -87,19 +85,10 @@ const cartReducer = (state = initialState, action) => {
         deletingProduct: true,
       }
     case DELETE_PRODUCT_IN_CART_SUCCESS:
-      const { cart, subTotalPrice, discount, ...myProducts } = state.products;
-      updatedCart = state.products.cart.filter(list => action.cart.deletedProduct.id !== list.id);
-      deletedCartValues = state.products.cart.filter(list => action.cart.deletedProduct.id === list.id);
-      myProducts.cart = updatedCart;
-      myProducts.totalItems = state.products.totalItems - action.cart.deletedProduct.quantity;
-      myProducts.discount = discount - deletedCartValues[0].discount;
-      myProducts.subTotalPrice = subTotalPrice - deletedCartValues[0].product.productTotalPrice;
-      myProducts.totalPrice = subTotalPrice - (deletedCartValues[0].product.productTotalPrice * deletedCartValues[0].quantity);
       return {
         ...state,
         deletingProduct: false,
-        product: action.deletedProduct,
-        products: myProducts
+        products: action.cart,
       }
     case DELETE_PRODUCT_IN_CART_FAILURE:
       return {

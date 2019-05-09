@@ -55,6 +55,9 @@ class ShoppingCart extends Component {
                       <th>Image</th>
                       <th>Product</th>
                       <th>Quantity</th>
+                      <th>Color</th>
+                      <th>Size</th>
+                      <th>Unit Price</th>
                       <th>Price</th>
                       <th>Remove</th>
                     </tr>
@@ -82,7 +85,14 @@ class ShoppingCart extends Component {
                                 })}
                               </select>
                             </td>
-                            <td> ${ item.product.productTotalPrice.toFixed(2) } </td>
+                            <td> { item.color } </td>
+                            <td> { item.size } </td>
+                            <td>  ${item.product.productDiscount > 0 ? item.product.productDiscount : item.product.price }
+                              {
+                                item.product.productDiscount > 0 ? <p className="cart-discount-para"> ${item.product.price} </p> : null
+                              }
+                            </td>
+                            <td> ${ item.product.productTotalPrice } </td>
                             <td>
                               <button 
                                 className="btn btn-danger"
@@ -122,13 +132,13 @@ class ShoppingCart extends Component {
                       <span className="bolden-value"> { cart.totalItems } </span> 
                     </p>
                     <p className="sum-title"> Total Price: 
-                      <span className="bolden-value"> ${ cart.subTotalPrice && cart.subTotalPrice.toFixed(2) } </span>
+                      <span className="bolden-value"> ${ cart.subTotalPrice && Number(cart.subTotalPrice).toFixed(2) } </span>
                     </p>
                     <p className="sum-title"> Total Discount:
-                      <span className="bolden-value"> ${ cart.discount && cart.discount.toFixed(2) } </span>
+                      <span className="bolden-value"> ${ cart.discount && Number(cart.discount).toFixed(2) } </span>
                     </p>
                     <p className="sum-title"> Final Price:  
-                      <span className="bolden-value"> ${ cart.totalPrice && cart.totalPrice.toFixed(2) } </span>
+                      <span className="bolden-value"> ${ cart.totalPrice && Number(cart.totalPrice).toFixed(2) } </span>
                     </p>
                   </div>
                 </div>

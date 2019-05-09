@@ -30,8 +30,8 @@ class NavBar extends Component {
 
   componentDidMount() {
     const { getCart, auth, getUserProfile } = this.props;
+    getCart();
     if (auth.isAuthenticated) {
-      getCart();
       getUserProfile();
     }
   }
@@ -42,17 +42,10 @@ class NavBar extends Component {
     const { inputValue } = this.state;
     const authMenu = (
       <ul className="navbar-nav ml-auto">
-        <li className="nav-item">
-          <Link className="cart-link" to="/my-cart">
-            <i className="fa fa-shopping-cart fa-2x cart-num"></i>
-            { totalInCart !== 0 ? <span className='badge badge-success' id='lblCartCount'> { totalInCart } </span> : '' }
-            <span>Cart</span>
-          </Link>
-        </li>
         <div className="vl"></div>
         <li className="nav-item dropdown">
           <Link className="nav-link dropdown-toggle user-profile-dropdown" to="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Hi, { user.firstName || auth.user.firstName }
+            Hi, { (user.name && user.name.split(' ')[0]) || auth.user.firstName }
           </Link>
           <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <Link className="dropdown-item" to="/me">Profile</Link>
@@ -101,6 +94,15 @@ class NavBar extends Component {
                 Search
               </Link>
             </form>
+            <ul className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <Link className="cart-link" to="/my-cart">
+                  <i className="fa fa-shopping-cart fa-2x cart-num"></i>
+                  { totalInCart !== 0 ? <span className='badge badge-success' id='lblCartCount'> { totalInCart } </span> : '' }
+                  <span>Cart</span>
+                </Link>
+              </li>
+            </ul>
             { isAuthenticated ? authMenu : menu }
           </div>
         </div>

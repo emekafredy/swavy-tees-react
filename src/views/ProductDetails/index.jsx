@@ -35,13 +35,9 @@ class ProductDetails extends Component {
   handleQuantityDecrement = () => this.setState({quantity: (this.state.quantity - 1)})
 
   handleAddToCart = (productId) => {
-    const { addToCart, auth, history } = this.props;
-    if (auth.isAuthenticated) {
-      const { sizeId, colorId, quantity } = this.state;
-      addToCart(productId, { sizeId, colorId, quantity });
-    } else {
-      history.push('/login');
-    }
+    const { addToCart } = this.props;
+    const { sizeId, colorId, quantity } = this.state;
+    addToCart(productId, { sizeId, colorId, quantity });
   }
 
   componentDidMount() {
@@ -66,8 +62,8 @@ class ProductDetails extends Component {
           <div className="col-md-5 product-details-column col-md-offset-2">
             <hr />
             <p> { product.description } </p>
-            <span className="final-price"> ${ (product.price - product.discountedPrice).toFixed(2) } </span>
-            <span className="product-price"> { product.discountedPrice > 0 ? `$${product.price}` : ''  } </span>
+            <span className="final-price"> ${ product.discounted_price > 0 ? product.discounted_price : product.price } </span>
+            <span className="product-price"> { product.discounted_price > 0 ? `$${product.price}` : ''  } </span>
             <hr />
             <div>
               <span className="color-title"> COLORS:   </span>
@@ -75,8 +71,8 @@ class ProductDetails extends Component {
                 return (
                   <button
                     className={`btn my-btns btn-${color.value} ${this.state.clicked ? 'override-btn-size' : ''}`}
-                    key={color.id}
-                    onClick={(e) => this.selectColor(e, color.id)}
+                    key={color.colorId}
+                    onClick={(e) => this.selectColor(e, color.colorId)}
                     value={ color.value }
                   />
                 )
@@ -93,8 +89,8 @@ class ProductDetails extends Component {
                 return (
                   <button
                     className="btn btn-info my-btns2"
-                    key={size.id}
-                    onClick={(e) => this.selectSize(e, size.id)}
+                    key={size.sizeId}
+                    onClick={(e) => this.selectSize(e, size.sizeId)}
                     value={ size.value }
                   > 
                     {size.value}

@@ -37,7 +37,7 @@ class UserProfile extends Component {
               alt="profile img"
             />
             <div className="card-body">
-              <h4 className="card-title text-center"> {`${user.firstName} ${user.lastName}`} </h4>
+              <h4 className="card-title text-center"> { user.name } </h4>
                 <ul className="list-inline text-center" id="courses">
                   <li className="list-inline-item"> <i className="fa fa-user"></i> { user.role } </li>            
                 </ul> <hr/>
@@ -49,11 +49,11 @@ class UserProfile extends Component {
                   </li>
                   <li className="list-group-item"> 
                     <p className="profile-details-key"> Address I </p>
-                    <span className="profile-details-value"> { user.address1 } </span>
+                    <span className="profile-details-value"> { user.address_1 } </span>
                   </li>
                   <li className="list-group-item"> 
                     <p className="profile-details-key"> Address II </p>
-                    <span className="profile-details-value"> { user.address2 } </span>
+                    <span className="profile-details-value"> { user.address_2 } </span>
                   </li>
                   <li className="list-group-item"> 
                     <p className="profile-details-key"> City </p>
@@ -61,7 +61,7 @@ class UserProfile extends Component {
                   </li>
                   <li className="list-group-item"> 
                     <p className="profile-details-key"> Postal Code </p>  
-                    <span className="profile-details-value"> { user.postalCode } </span>
+                    <span className="profile-details-value"> { user.postal_code } </span>
                   </li>
                   <li className="list-group-item"> 
                     <p className="profile-details-key"> Country </p>  
@@ -69,15 +69,15 @@ class UserProfile extends Component {
                   </li>
                   <li className="list-group-item"> 
                     <p className="profile-details-key"> Day Phone </p>  
-                    <span className="profile-details-value"> { user.dayPhone } </span>
+                    <span className="profile-details-value"> { user.day_phone } </span>
                   </li>
                   <li className="list-group-item"> 
                     <p className="profile-details-key"> Evening Phone </p>  
-                    <span className="profile-details-value"> { user.eveningPhone } </span>
+                    <span className="profile-details-value"> { user.evening_phone } </span>
                   </li>
                   <li className="list-group-item"> 
                     <p className="profile-details-key"> Mobile Phone </p>  
-                    <span className="profile-details-value"> { user.mobilePhone } </span>
+                    <span className="profile-details-value"> { user.mobile_phone } </span>
                   </li>
                 </ul>  <hr/> 
               </div>       

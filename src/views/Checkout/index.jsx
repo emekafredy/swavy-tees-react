@@ -43,14 +43,14 @@ class Checkout extends Component {
 
   render() {
     const { user, fetchingProfile, regions, fetchingRegions, totalPrice, cart } = this.props;
-    const shippings = regions.filter(item => item.id === Number(this.state.selectedRegion))[0];
+    const shippings = regions.filter(item => item.shipping_region_id === Number(this.state.selectedRegion))[0];
     const getShippingCost = shippings && shippings.Shippings.map(shipping => shipping)
-      .filter(cost => cost.id === Number(this.state.selectedType));
+      .filter(cost => cost.shipping_id === Number(this.state.selectedType));
     const cost = getShippingCost && getShippingCost[0];
-    const grandTotal = (cost && cost.shippingCost) ? (totalPrice + Number(cost.shippingCost)).toFixed(2)
-    : totalPrice && totalPrice.toFixed(2);
+
+    const grandTotal = (cost && cost.shipping_cost) ? (Number(totalPrice) + Number(cost.shipping_cost)).toFixed(2)
+    : totalPrice && Number(totalPrice).toFixed(2);
     const message = 'please update your information to proceed with payments';
-  
     return (
       <div className="checkout-wrapper">
         {cart && cart.length === 0 ? 
@@ -67,11 +67,11 @@ class Checkout extends Component {
                     <p className="checkout-card-title"> User Details </p>
                   </div>
                   <div className="card-body">
-                    <h5 className="card-title checkout-user-info"> { `${user.firstName} ${user.lastName}` } </h5>
-                    <p className="card-text checkout-user-info"> { user.address1 } </p>
-                    <p className="card-text checkout-user-info"> { user.mobilePhone } </p>
+                    <h5 className="card-title checkout-user-info"> { user.name } } </h5>
+                    <p className="card-text checkout-user-info"> { user.address_1 } </p>
+                    <p className="card-text checkout-user-info"> { user.mobile_phone } </p>
                     <p className="card-text checkout-user-info"> <em> { user.city }, { user.country }  </em> </p>
-                    { !user.address1 || !user.mobilePhone || !user.city || !user.country ?
+                    { !user.address_1 || !user.mobile_phone || !user.city || !user.country ?
                       <p className="little-warning"> { message } </p> : null
                     }
                   </div>
@@ -104,13 +104,13 @@ class Checkout extends Component {
                             <select 
                               className="form-control" 
                               id="sel1"
-                              defaultValue={regions.filter(item => item.id === 1)[0].id}
+                              defaultValue={regions.filter(item => item.shipping_region_id === 1)[0].id}
                               onChange={(e) => this.handleChangeRegion(e, 'selectedRegion')}
                             >                         
                               {regions.map(region => {
                                 return (
-                                  <option key={region.id} value={region.id}>
-                                    { region.shippingRegion }
+                                  <option key={region.shipping_region_id} value={region.shipping_region_id}>
+                                    { region.shipping_region }
                                   </option>
                               )})}
                             </select>
@@ -127,8 +127,8 @@ class Checkout extends Component {
                             <option key="unique" value={null}>Please Select</option>                        
                             {shippings && shippings.Shippings.map(shipping => {
                               return (
-                                <option key={shipping.id} value={shipping.id}>
-                                  { shipping.shippingType }
+                                <option key={shipping.shipping_id} value={shipping.shipping_id}>
+                                  { shipping.shipping_type }
                                 </option>
                             )})}
                             </select>
@@ -149,12 +149,12 @@ class Checkout extends Component {
                   <div className="card-body">
                     <p>
                       <span className="pull-left"> Subtotal Cost </span>
-                      <span className="pull-right"> ${ totalPrice && totalPrice.toFixed(2) } </span>
+                      <span className="pull-right"> ${ totalPrice && Number(totalPrice).toFixed(2) } </span>
                     </p>
                     <hr/>
                     <p>
                       <span className="pull-left"> Shipping Cost </span>
-                      <span className="pull-right"> ${ cost && Number(cost.shippingCost) } </span>
+                      <span className="pull-right"> ${ cost && Number(cost.shipping_cost) } </span>
                     </p>
                   </div>
                   <div className="card-footer text-muted">
@@ -179,7 +179,7 @@ class Checkout extends Component {
                     stripeKey='pk_test_Dd2IUOC4Lxnin6RXIjuSzGeC'
                     image="https://t3.ftcdn.net/jpg/01/18/87/58/240_F_118875860_IERKvtHdaL0vPBQVamWNLdRgz3gDUL3c.jpg"
                     disabled={
-                      Number(this.state.selectedType) === 0 || !user.address1 || !user.mobilePhone || !user.city || !user.country
+                      Number(this.state.selectedType) === 0 || !user.address_1 || !user.mobile_phone || !user.city || !user.country
                     }
                   />
                 </div>

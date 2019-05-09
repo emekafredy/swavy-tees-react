@@ -8,16 +8,16 @@ class CategoriesAPI {
     return axios.get(`${baseUrl}/product-categories`);
   }
 
-  static getCategory(categoryName) {
-    return axios.get(`${baseUrl}/products?category=${categoryName}`);
+  static getCategory(categoryName, currentPage) {
+    return axios.get(`${baseUrl}/products?category=${categoryName}&page=${currentPage}`);
   }
 
   static getDepartments() {
     return axios.get(`${baseUrl}/departments`);
   }
 
-  static searchByKeyword(keyword) {
-    return axios.get(`${baseUrl}/products?keyword=${keyword}`);
+  static searchByKeyword(keyword, currentPage) {
+    return axios.get(`${baseUrl}/products?keyword=${keyword}&page=${currentPage}`);
   }
 }
 

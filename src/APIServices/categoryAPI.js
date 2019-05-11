@@ -19,6 +19,10 @@ class CategoriesAPI {
   static searchByKeyword(keyword, currentPage) {
     return axios.get(`${baseUrl}/products?keyword=${keyword}&page=${currentPage}`);
   }
+
+  static getProductsByDepartment(departmentId) {
+    return axios.get(`${baseUrl}/products/department/${departmentId}`)
+  }
 }
 
 export default CategoriesAPI;

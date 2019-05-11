@@ -31,12 +31,14 @@ class Checkout extends Component {
   };
 
   onToken = async (token) => {
+    const cartId = localStorage.getItem('cartId');
     const { makePayment, history } = this.props;
     const { selectedType } = this.state;
     const paymentData = {
       shippingId: Number(selectedType),
       stripeToken: token.id,
-      stripeEmail: token.email
+      stripeEmail: token.email,
+      cartId
     };
     await makePayment(paymentData, history);
   }
@@ -67,7 +69,7 @@ class Checkout extends Component {
                     <p className="checkout-card-title"> User Details </p>
                   </div>
                   <div className="card-body">
-                    <h5 className="card-title checkout-user-info"> { user.name } } </h5>
+                    <h5 className="card-title checkout-user-info"> { user.name } </h5>
                     <p className="card-text checkout-user-info"> { user.address_1 } </p>
                     <p className="card-text checkout-user-info"> { user.mobile_phone } </p>
                     <p className="card-text checkout-user-info"> <em> { user.city }, { user.country }  </em> </p>

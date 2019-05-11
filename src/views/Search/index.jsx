@@ -73,7 +73,6 @@ class Search extends Component {
   render() {
     const { fetchingCategories, products, subHeaderTitle, paginationData } = this.props;
     const subHeaderMessage = `Your Search Results for ${ this.props.match.params.input }`;
-    console.log('TYPE OF', typeof paginationData);
     const { limit, total, keyword } = paginationData;
     const pageNumbers = [];
     for (let index = 1; index <= Math.ceil(total / limit); index++) {

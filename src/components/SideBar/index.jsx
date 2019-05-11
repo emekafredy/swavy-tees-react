@@ -27,6 +27,8 @@ class SideMenuBar extends Component {
       departmentId: deptId,
       showMenu: true
     });
+    const { history } = this.props;
+    history.push(`/products/departments/${deptId}`)
   }
 
   setCategoryId = (event, catId, name) => {
@@ -54,17 +56,17 @@ class SideMenuBar extends Component {
                         const { department_id, name } = department;
                         return (
                           <li 
-                            className={`categories-li ${department_id === departmentId ? 'active-background' : ''}`} 
+                            className={`categories-li `} 
                             key={ department_id }
                           >
-                            <Link 
-                              to="/" 
+                            <button
+                              className={`dept-btn ${department_id === departmentId ? 'active-background' : ''}`}
                               onClick={(e) => this.showMenu(e, department_id)}
                               value={ department_id }
                             > 
                               <i className="fa fa-arrow"></i>
                               <span> { name.toUpperCase() } </span> 
-                            </Link>
+                            </button>
                           </li>
                         )
                       }) }
@@ -74,7 +76,7 @@ class SideMenuBar extends Component {
                 <hr/>
                 <hr/>
                 <div>
-                  <ul className="list-group">
+                  <ul>
                     {
                       this.state.showMenu
                       ? <div className="category-div">
@@ -87,7 +89,7 @@ class SideMenuBar extends Component {
                                     <button
                                       key={category_id}
                                       onClick={(e) => this.setCategoryId(e, category_id, name)}
-                                      className={`list-group-item my-category-menu ${category_id === categoryId ? 'active-category' : ''}`}
+                                      className={`my-category-menu ${category_id === categoryId ? 'active-category' : ''}`}
                                     > 
                                       <span> { category.name } </span> 
                                     </button>

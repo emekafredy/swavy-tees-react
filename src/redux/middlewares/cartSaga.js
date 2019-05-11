@@ -46,7 +46,12 @@ export function* watchAddProductToCart() {
 
 export function* getCartSaga() {
   try {
-    const response = yield call(CartAPI.getCart);
+    const cartId = localStorage.getItem('cartId');
+    if (!cartId) {
+      const cartIdResponse = yield call(CartAPI.generateCartId);
+      localStorage.setItem('cartId', cartIdResponse.data.cartId);
+    }
+    const response = yield call(CartAPI.getCart, cartId);
     const { data } = response;
     yield put(getCartSuccess(data));
   }
@@ -62,8 +67,9 @@ export function* watchGetCart() {
 
 export function* updateCartSaga(action) {
   try {
-    const { cartId, quantity } = action;
-    const response = yield call(CartAPI.updateProductInCart, cartId, quantity);
+    const cartId = localStorage.getItem('cartId');
+    const { id, quantity } = action;
+    const response = yield call(CartAPI.updateProductInCart, cartId, id, quantity);
     const { data } = response;
     yield put(updateCartSuccess(data));
   }
@@ -79,8 +85,9 @@ export function* watchUpdateCartSaga() {
 
 export function* deleteCartSaga(action) {
   try {
-    const { cartId } = action;
-    const response = yield call(CartAPI.removeProductFromCart, cartId);
+    const cartId = localStorage.getItem('cartId');
+    const { id } = action;
+    const response = yield call(CartAPI.removeProductFromCart, cartId, id);
     const { data } = response;
     yield put(deleteCartSuccess(data));
     toast.success(data.message);
@@ -97,7 +104,8 @@ export function* watchDeleteCartSaga() {
 
 export function* clearCartSaga() {
   try {
-    const response = yield call(CartAPI.clearCart);
+    const cartId = localStorage.getItem('cartId');
+    const response = yield call(CartAPI.clearCart, cartId);
     const { data } = response;
     yield put(clearCartSuccess(data));
     toast.success(data.message);

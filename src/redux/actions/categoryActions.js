@@ -10,7 +10,10 @@ import {
   SEARCH_BY_KEYWORD_FAILURE,
   GET_DEPARTMENTS,
   GET_DEPARTMENTS_SUCCESS,
-  GET_DEPARTMENTS_FAILURE
+  GET_DEPARTMENTS_FAILURE,
+  GET_PRODUCTS_BY_DEPARTMENT,
+  GET_PRODUCTS_BY_DEPARTMENT_SUCCESS,
+  GET_PRODUCTS_BY_DEPARTMENT_FAILURE
 } from '../constants';
 
 export const getCategories = () => ({
@@ -70,5 +73,20 @@ export const getDepartmentsSuccess = departments => ({
 
 export const getDepartmentsFailure = error => ({
   type: GET_DEPARTMENTS_FAILURE,
+  error
+});
+
+export const getProductsByDepartment = departmentId => ({
+  type: GET_PRODUCTS_BY_DEPARTMENT,
+  departmentId
+});
+
+export const getProductsByDepartmentSuccess = products => ({
+  type: GET_PRODUCTS_BY_DEPARTMENT_SUCCESS,
+  products,
+});
+
+export const getProductsByDepartmentFailure = error => ({
+  type: GET_PRODUCTS_BY_DEPARTMENT_FAILURE,
   error
 });

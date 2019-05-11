@@ -112,7 +112,7 @@ class ShoppingCart extends Component {
                 <div className="cart-bottom-display">
                   <div className="cart-left-pane">
                     <button
-                      disabled={ deletingProduct }
+                      disabled={ deletingProduct || !cart.cart  || cart.cart.length === 0}
                       className="btn btn-danger"
                       onClick={ this.handleClearCart }
                     >

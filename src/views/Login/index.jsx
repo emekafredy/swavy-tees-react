@@ -40,7 +40,6 @@ class Login extends Component {
   }
 
   componentWillUnmount() {
-    console.log('Dismounted');
     this.setState({ });
   }
 

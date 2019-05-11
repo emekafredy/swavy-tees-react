@@ -40,6 +40,7 @@ const checkoutReducer = (state = initialState, action) => {
       return {
         ...state,
         makingPayment: false,
+        cart: {}
       }
     case MAKE_PAYMENT_FAILURE:
       return {

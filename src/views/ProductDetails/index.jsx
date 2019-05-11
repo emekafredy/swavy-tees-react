@@ -35,9 +35,10 @@ class ProductDetails extends Component {
   handleQuantityDecrement = () => this.setState({quantity: (this.state.quantity - 1)})
 
   handleAddToCart = (productId) => {
+    const cartId = localStorage.getItem('cartId');
     const { addToCart } = this.props;
     const { sizeId, colorId, quantity } = this.state;
-    addToCart(productId, { sizeId, colorId, quantity });
+    addToCart(productId, { sizeId, colorId, quantity, cartId });
   }
 
   componentDidMount() {

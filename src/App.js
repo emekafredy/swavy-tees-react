@@ -27,6 +27,7 @@ import NotFound from './components/ProtectRoutes/NotFound';
 import Orders from './views/Orders';
 import PrivateRoute from './components/ProtectRoutes/PrivateRoute';
 import Search from './views/Search';
+import DepartmentProducts from './views/Department';
 
 axios.defaults.withCredentials = true;
 if (localStorage.jwtToken) {
@@ -63,6 +64,7 @@ class App extends Component {
                 <Route exact path="/category/:name/:id" component={ Category } />
                 <Route exact path="/keyword/:input" component={ Search } />
                 <Route exact path="/keyword/:input/:id" component={ Search } />
+                <Route exact path="/products/departments/:id" component={ DepartmentProducts } />
                 <Route path="/my-cart" component={ ShoppingCart } />
                 <PrivateRoute path="/me" component={ UserProfile } />
                 <PrivateRoute path="/checkout" component={ Checkout } />

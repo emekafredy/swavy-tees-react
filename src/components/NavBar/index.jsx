@@ -30,7 +30,8 @@ class NavBar extends Component {
 
   componentDidMount() {
     const { getCart, auth, getUserProfile } = this.props;
-    getCart();
+    const cartId = localStorage.getItem('cartId');
+    getCart(cartId);
     if (auth.isAuthenticated) {
       getUserProfile();
     }

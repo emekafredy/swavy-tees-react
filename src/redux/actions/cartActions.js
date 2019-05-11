@@ -46,9 +46,9 @@ export const getCartFailure = error => ({
   error,
 });
 
-export const updateCart = (cartId, quantity) => ({
+export const updateCart = (id, quantity) => ({
   type: UPDATE_CART,
-  cartId,
+  id,
   quantity
 });
 
@@ -62,9 +62,9 @@ export const updateCartFailure = error => ({
   error,
 });
 
-export const deleteCart = cartId => ({
+export const deleteCart = id => ({
   type: DELETE_PRODUCT_IN_CART,
-  cartId
+  id
 });
 
 export const deleteCartSuccess = cart => ({

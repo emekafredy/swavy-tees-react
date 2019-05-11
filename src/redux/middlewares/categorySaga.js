@@ -9,10 +9,18 @@ import {
   searchByKeywordSuccess,
   searchByKeywordFailure,
   getDepartmentsSuccess,
-  getDepartmentsFailure
+  getDepartmentsFailure,
+  getProductsByDepartmentSuccess,
+  getProductsByDepartmentFailure
 } from '../actions/categoryActions';
 
-import { GET_CATEGORIES, GET_CATEGORY, SEARCH_BY_KEYWORD, GET_DEPARTMENTS } from '../constants';
+import {
+  GET_CATEGORIES,
+  GET_CATEGORY,
+  SEARCH_BY_KEYWORD,
+  GET_DEPARTMENTS,
+  GET_PRODUCTS_BY_DEPARTMENT
+} from '../constants';
 
 export function* getCategoriesSaga() {
   try {
@@ -78,4 +86,21 @@ export function* getDepartmentsSaga() {
 
 export function* watchGetDepartmentsSaga() {
   yield takeLatest(GET_DEPARTMENTS, getDepartmentsSaga);
+}
+
+export function* getProductsByDepartmentSaga(action) {
+  const { departmentId } = action;
+  try {
+    const response = yield call(CategoriesAPI.getProductsByDepartment, departmentId);
+    const { data } = response;
+    yield put(getProductsByDepartmentSuccess(data));
+  }
+  catch (error) {
+    yield put(getProductsByDepartmentFailure(error));
+    toast.error(error.response.data);
+  }
+}
+
+export function* watchGetProductsByDepartmentSaga() {
+  yield takeLatest(GET_PRODUCTS_BY_DEPARTMENT, getProductsByDepartmentSaga);
 }

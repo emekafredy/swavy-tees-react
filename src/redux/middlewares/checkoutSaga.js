@@ -30,7 +30,6 @@ export function* makePaymentSaga(action) {
   try {
     const { paymentData, history } = action;
     const response = yield call(CheckoutAPI.makePayment, paymentData);
-    console.log('RES', response);
     const { data } = response;
     yield put(makePaymentSuccess(data));
     toast.success(`Congratulations! Your payment was successful. 

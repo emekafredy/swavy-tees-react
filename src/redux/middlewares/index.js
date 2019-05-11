@@ -4,7 +4,8 @@ import {
   watchGetCategoriesSaga,
   watchGetCategorySaga,
   watchSearchByKeywordSaga,
-  watchGetDepartmentsSaga
+  watchGetDepartmentsSaga,
+  watchGetProductsByDepartmentSaga
 } from './categorySaga';
 import { watchUserSignUpSaga, watchlogUserOutSaga, watchUserLoginSaga } from './authSaga';
 import {
@@ -38,7 +39,8 @@ function* rootSaga() {
     watchMakePaymentSaga(),
     watchGetOrdersSaga(),
     watchSearchByKeywordSaga(),
-    watchGetDepartmentsSaga()
+    watchGetDepartmentsSaga(),
+    watchGetProductsByDepartmentSaga()
   ])
 }
 

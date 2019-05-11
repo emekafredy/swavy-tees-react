@@ -10,7 +10,10 @@ import {
   SEARCH_BY_KEYWORD_FAILURE,
   GET_DEPARTMENTS,
   GET_DEPARTMENTS_SUCCESS,
-  GET_DEPARTMENTS_FAILURE
+  GET_DEPARTMENTS_FAILURE,
+  GET_PRODUCTS_BY_DEPARTMENT,
+  GET_PRODUCTS_BY_DEPARTMENT_SUCCESS,
+  GET_PRODUCTS_BY_DEPARTMENT_FAILURE
 } from '../constants';
 
 export const initialState = {
@@ -94,6 +97,24 @@ const categoryReducer = (state = initialState, action) => {
         ...state,
         fetchingDepartments: false,
         error: action.error,
+      }
+    case GET_PRODUCTS_BY_DEPARTMENT:
+      return {
+        ...state,
+        fetchingCategories: true,
+      }
+    case GET_PRODUCTS_BY_DEPARTMENT_SUCCESS:
+      return {
+        ...state,
+        fetchingCategories: false,
+        products: action.products,
+      }
+    case GET_PRODUCTS_BY_DEPARTMENT_FAILURE:
+      return {
+        ...state,
+        fetchingCategories: false,
+        error: action.error,
+        products: [],
       }
     default:
       return state;

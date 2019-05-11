@@ -8,20 +8,24 @@ class CartAPI {
     return axios.post(`${baseUrl}/shopping-cart/${productId}`, productData);
   }
 
-  static getCart() {
-    return axios.get(`${baseUrl}/shopping-cart`);
+  static generateCartId() {
+    return axios.post(`${baseUrl}/cart/generateId`);
   }
 
-  static removeProductFromCart(cartId) {
+  static getCart(cartId) {
+    return axios.get(`${baseUrl}/shopping-cart/${cartId}`);
+  }
+
+  static removeProductFromCart(cartId, id) {
+    return axios.delete(`${baseUrl}/shopping-cart/${cartId}/${id}`);
+  }
+
+  static clearCart(cartId) {
     return axios.delete(`${baseUrl}/shopping-cart/${cartId}`);
   }
 
-  static clearCart() {
-    return axios.delete(`${baseUrl}/shopping-cart`);
-  }
-
-  static updateProductInCart(cartId, quantity) {
-    return axios.put(`${baseUrl}/shopping-cart/${cartId}`, { quantity });
+  static updateProductInCart(cartId, id, quantity) {
+    return axios.put(`${baseUrl}/shopping-cart/${cartId}/${id}`, { quantity });
   }
 }
 

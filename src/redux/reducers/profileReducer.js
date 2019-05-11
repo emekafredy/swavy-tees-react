@@ -50,7 +50,6 @@ const profileReducer = (state = initialState, action) => {
         profile: action.updatedUser.updatedUser,
       }
     case UPDATE_USER_PROFILE_FAILURE:
-      console.log('ERROE', action.error);
       return {
         ...state,
         updatingProfile: false,

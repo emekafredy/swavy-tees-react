@@ -52,16 +52,19 @@
       margin: 0;
 
       li.categories-li {
-        border: 1px solid #ccc;
+        // border: 1px solid #ccc;
         border-left: none;
         border-right: none;
-        a {
+        .dept-btn {
           display: inline-block;
-          width: 100%;
+          width: 90%;
+          margin: 10px 5% 0 5%;
           text-decoration: none;
+          background: #31353D;
           position: relative;
           padding: 8px 30px 8px 20px;
           color: #fff;
+          outline: none;
           &:hover {
             color: #000 !important;
             background-color: #5cb85c;
@@ -69,8 +72,8 @@
         }
       }
 
-      li.active-background {
-        background-color: #5cb85c;
+      .active-background {
+        background-color: #5cb85c !important;
       }
     }
   }
@@ -80,20 +83,18 @@
   color: #fff !important;
 
   .my-category-menu {
-    font-size: 1rem;
-    margin-left: 0px;
+    display: inline-block;
+    width: 90%;
+    margin: 10px 5% 0 5%;
+    text-decoration: none;
     background: #31353D;
-    border: 1px solid #ccc;
-    border-left: none;
-    border-right: none;
+    position: relative;
+    padding: 8px 30px 8px 20px;
     color: #fff;
-    text-transform: uppercase;
-    width: 100%;
-    text-align: left;
     outline: none;
-
     &:hover {
-      background-color: #408b40;
+      color: #000 !important;
+      background-color: #5cb85c;
     }
   }
 
